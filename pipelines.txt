@@ -1,0 +1,70 @@
+Positive example:-
+
+pipeline {
+	agent any 
+	stages {
+		stage('Build') {
+			options {
+				retry(3)
+				}
+			}
+			steps{
+				echo "Before error statement"
+				error "Error statement just got executed"
+				echo "After error statement"
+			}
+		}
+	}
+}
+
+Negative Example:-
+
+Timeout:-
+
+pipeline{
+	agent any
+	stages {
+		stage('Build') {
+			options{
+				timeout
+				}
+			steps {
+				echo "Hello World"
+				sleep 2
+			}
+		}
+	}
+}
+
+			
+			
+Environment:-
+
+pipeline {
+	agent any
+	environment {
+		name1 = "Aditya"
+		name2 = "Sanjeev"
+	}
+	stages {
+		stage('Build') {
+			environment {
+				name3 = "Kumar"
+			}
+	        steps {
+				echo "name1 $(name1)"
+				echo "name2 $(name2)"
+				echo "name3 $(name3)"
+			}
+		}
+	}
+}
+ 
+
+Secret
+
+pipeline {
+	agent any
+	stages('Build'){
+		environment {
+		
